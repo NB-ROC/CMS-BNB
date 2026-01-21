@@ -1,46 +1,60 @@
 {% load static wagtailcore_tags wagtailuserbar %}
 
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>
-            {% block title %}
-            {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
-            {% endblock %}
-            {% block title_suffix %}
-            {% wagtail_site as current_site %}
-            {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
-            {% endblock %}
-        </title>
-        {% if page.search_description %}
-        <meta name="description" content="{{ page.search_description }}" />
-        {% endif %}
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+<html lang="nl">
+<head>
+    <meta charset="utf-8" />
+    <title>
+        {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+    </title>
 
-        {# Force all links in the live preview panel to be opened in a new tab #}
-        {% if request.in_preview_panel %}
-        <base target="_blank">
-        {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% if page.search_description %}
+        <meta name="description" content="{{ page.search_description }}">
+    {% endif %}
 
-        {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/BNB.css' %}">
+    <link rel="stylesheet" href="{% static 'css/BNB.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
 
-        {% block extra_css %}
-        {# Override this in templates to add extra stylesheets #}
-        {% endblock %}
-    </head>
+<body>
+    {% wagtailuserbar %}
 
-    <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="/">{{ settings.site_settings.SiteSettings.site_name|default:"Logo" }}</a>
+            </div>
 
+            {% load wagtailcore_tags %}
+
+            <nav class="main-nav">
+                {# Home link: safe fallback #}
+                {% if page %}
+                    <a href="{% pageurl page.get_root %}">Home</a>
+                {% else %}
+                    <a href="/">Home</a>
+                {% endif %}
+
+                {# Menu pages only if Wagtail context exists #}
+                {% if page and page.get_root %}
+                    {% for child in page.get_root.get_children.live.in_menu %}
+                        <a href="{% pageurl child %}">{{ child.title }}</a>
+                    {% endfor %}
+                {% endif %}
+            </nav>
+
+            <div class="header-actions">
+                <a href="#" class="btn btn-secondary">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-content">
         {% block content %}{% endblock %}
+    </main>
 
-        {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/BNB.js' %}"></script>
-
-        {% block extra_js %}
-        {# Override this in templates to add extra javascript #}
-        {% endblock %}
-    </body>
+    <script src="{% static 'js/BNB.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
 </html>

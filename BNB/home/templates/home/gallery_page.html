@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="container">
+    <h1>Foto’s</h1>
+
+    <div class="grid grid-3" style="margin-top:2rem;">
+        {% for i in "123456789" %}
+            <img src="{% static 'images/photo'|add:i|add:'.jpg' %}" class="card">
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="container grid grid-2">
+    <div>
+        <h1>Contact</h1>
+        <p>Neem gerust contact op.</p>
+
+        <p>
+            Naam accommodatie<br>
+            Straatnaam 1<br>
+            info@email.nl
+        </p>
+    </div>
+
+    <form class="card">
+        <label>Naam</label>
+        <input type="text">
+
+        <label>E-mail</label>
+        <input type="email">
+
+        <label>Vraag</label>
+        <textarea></textarea>
+
+        <button class="btn btn-secondary">Versturen</button>
+    </form>
+</section>
+{% endblock %}

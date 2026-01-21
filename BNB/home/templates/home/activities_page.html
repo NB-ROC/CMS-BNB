@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="container">
+    <h1>Activiteiten in de buurt</h1>
+
+    <div class="grid grid-3" style="margin-top:2rem;">
+        <div class="card">
+            <img src="{% static 'images/activity1.jpg' %}">
+            <h3>Center Parcs</h3>
+            <p>Ideaal voor een dagje uit.</p>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'images/activity2.jpg' %}">
+            <h3>Lange Ven</h3>
+            <p>Prachtige natuurwandeling.</p>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'images/activity3.jpg' %}">
+            <h3>De Fabriek</h3>
+            <p>Eten & drinken in de buurt.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
