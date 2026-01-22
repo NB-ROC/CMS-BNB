@@ -1,32 +1,35 @@
 {% extends "base.html" %}
-{% load static %}
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-<section class="hero container grid grid-2">
-    <div>
-        <h1>Naam accommodatie</h1>
-        <p>
-            Rustige B&B in het groen, ideaal voor een ontspannen verblijf.
-            Geniet van comfort, natuur en privacy.
-        </p>
 
+<section class="container">
+    <h1>{{ page.title }}</h1>
+
+    {% if page.intro %}
+        <p>{{ page.intro }}</p>
+    {% endif %}
+</section>
+
+<section class="container grid grid-2">
+    <div class="card">
+        <img src="https://via.placeholder.com/600x400" alt="">
+        <h2>Naam accommodatie</h2>
+        <p>
+            Korte introductie van de B&B. Rust, natuur en comfort.
+        </p>
         <a href="/boeken/" class="btn btn-secondary">Boeken</a>
     </div>
 
-    <div>
-        <img src="{% static 'images/front.jpg' %}" alt="Accommodatie">
-    </div>
-</section>
-
-<section class="container grid grid-2" style="margin-top: 3rem;">
-    <div>
-        <img src="{% static 'images/kitchen.jpg' %}" alt="Keuken">
-    </div>
-    <div>
+    <div class="card">
+        <img src="https://via.placeholder.com/600x400" alt="">
         <h2>Extra info</h2>
         <p>
-            Volledig uitgeruste keuken, privé tuin en moderne badkamer.
+            Informatie over faciliteiten, omgeving en sfeer.
         </p>
     </div>
 </section>
-{% endblock %}
+
+{% endblock content %}

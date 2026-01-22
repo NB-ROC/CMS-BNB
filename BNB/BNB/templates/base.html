@@ -3,12 +3,17 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <title>
-        {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+        {% if page.seo_title %}
+            {{ page.seo_title }}
+        {% else %}
+            {{ page.title }}
+        {% endif %}
     </title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     {% if page.search_description %}
         <meta name="description" content="{{ page.search_description }}">
     {% endif %}
@@ -23,25 +28,15 @@
     <header class="site-header">
         <div class="container header-inner">
             <div class="logo">
-                <a href="/">{{ settings.site_settings.SiteSettings.site_name|default:"Logo" }}</a>
+                <a href="/">Logo</a>
             </div>
 
-            {% load wagtailcore_tags %}
-
             <nav class="main-nav">
-                {# Home link: safe fallback #}
-                {% if page %}
-                    <a href="{% pageurl page.get_root %}">Home</a>
-                {% else %}
-                    <a href="/">Home</a>
-                {% endif %}
-
-                {# Menu pages only if Wagtail context exists #}
-                {% if page and page.get_root %}
-                    {% for child in page.get_root.get_children.live.in_menu %}
-                        <a href="{% pageurl child %}">{{ child.title }}</a>
-                    {% endfor %}
-                {% endif %}
+                <a href="/">Home</a>
+                <a href="/boeken/">Boeken</a>
+                <a href="/activiteiten/">Activiteiten</a>
+                <a href="/fotos/">Foto’s</a>
+                <a href="/contact/">Contact</a>
             </nav>
 
             <div class="header-actions">
